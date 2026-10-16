@@ -1,8 +1,5 @@
 name: zip-and-release
-on:
-  push:
-    tags:
-    - '*'
+on: push
     
 permissions:
   packages: write
@@ -23,5 +20,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: "ijzm-qol.zip"
+          tag: main
+          commit: main
 
   
