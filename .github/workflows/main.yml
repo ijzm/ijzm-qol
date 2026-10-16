@@ -6,7 +6,7 @@ permissions:
   contents: write
 
 jobs:
-  zip-and-release:
+  build:
     runs-on: ubuntu-slim
     steps:
       - name: Clone GIT repo
@@ -14,13 +14,14 @@ jobs:
       - name: zip
         run: |
           zip -r ijzm-qol.zip . -x ".git/*" -x ".github/*"
-      - name: Create Release
-        uses: ncipollo/release-action@v1
+      - name: Create release
+        uses: Roang-zero1/github-create-release-action@v2
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload release artifacts
+        uses: Roang-zero1/github-upload-release-artifacts-action@v2
         with:
-          artifacts: "ijzm-qol.zip"
-          tag: main
-          commit: main
-
+          args: "ijzm-qol.zip"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
