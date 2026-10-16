@@ -1,6 +1,9 @@
 name: zip-and-release
-on: push
-
+on:
+  push:
+    tags:
+    - '*'
+    
 permissions:
   packages: write
   contents: write
