@@ -1,5 +1,5 @@
 name: zip-and-release
-on: workflow_dispatch
+on: push
 
 permissions:
   packages: write
@@ -20,6 +20,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           artifacts: "ijzm-qol.zip"
-          tag: ${{ github.ref }}
 
   
