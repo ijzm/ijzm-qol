@@ -13,4 +13,5 @@ QOL Datapack for Minecraft 26.3
 - Fast chest recipe
 - Fast stick recipe
 - Fast hopper recipe
+- Fast repeater recipe
 - Log stripping on 
