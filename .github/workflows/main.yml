@@ -11,17 +11,19 @@ jobs:
     steps:
       - name: Clone GIT repo
         uses: actions/checkout@v7
+
       - name: zip
         run: |
           zip -r ijzm-qol.zip . -x ".git/*" -x ".github/*"
-      - name: Create release
-        uses: Roang-zero1/github-create-release-action@v2
+
+      - name: Create draft prerelease
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload release artifacts
-        uses: Roang-zero1/github-upload-release-artifacts-action@v2
-        with:
-          args: "ijzm-qol.zip"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.run_number }}
+        run: |
+          gh release create "$TAG" ijzm-qol.zip \
+            --target "$GITHUB_SHA" \
+            --title "${{ github.run_number }}" \
+            --notes "Built by workflow run ${{ github.run_id }}" \
   
